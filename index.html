@@ -1,0 +1,382 @@
+<html>
+<head>
+<title>Chakura Calculator Dmath 0853434</title>
+</head>
+<style type="text/css">
+table
+{   border-collapse:separate;
+    border:1px solid black;
+}
+
+.box{ background:rgba(255, 255, 255, 0.85);margin-bottom:10px;}
+
+.font{	font-size:25px}
+.font2{	font-size:20px}
+</style>
+<script>
+	function Factorial(n)
+    { 	fact = 1;
+		for (i=2; i<=n; i++)
+			fact *= i;
+		return fact;
+	}
+
+	function Perm(n, r)
+	{	perm = n;
+		for (i=n-1; i>n-r; i--)
+			perm *= i;
+		return perm;
+	}
+		
+	function Comb(n, r)
+	{   return Perm(n, r) / Factorial(r);
+	} 
+
+	function clickPerm()
+	{   document.getElementById("resPermutation").innerHTML = "";
+		n = document.getElementById("n").value;
+		r = document.getElementById("r").value;
+		if (invalid(n, r)) return;
+		document.getElementById("resPermutation").innerHTML = Perm(n, r);
+	}
+	
+	function clickComb()
+	{   document.getElementById("resCombination").innerHTML = "";
+		n = document.getElementById("n").value;
+		r = document.getElementById("r").value;          
+		if (invalid(n, r)) return;    
+		document.getElementById("resCombination").innerHTML = Comb(n, r);
+	}
+	
+	function clickArra()
+	{   document.getElementById("resArrangement").innerHTML = ""
+		n = document.getElementById("n").value;
+		r = document.getElementById("r").value;
+		if (invalid(n, r)) return;    
+		document.getElementById("resArrangement").innerHTML = Math.pow(n, r);
+	}
+		
+	function clickSele()
+	{   document.getElementById("resSelectrofn").innerHTML = "";
+	    n = parseInt(document.getElementById("n").value);
+	    r = parseInt(document.getElementById("r").value);
+		if (invalid(n, r)) return;
+		document.getElementById("resSelectrofn").innerHTML = Comb(n + r - 1, r);
+	}
+   
+    function invalid(n, r)  
+    {	if (parseInt(n) < 0 || isNaN(parseInt(n)))
+		{   document.getElementById("n").focus();
+			return true;
+		}
+	    else if (parseInt(r) < 0 || isNaN(parseInt(r)))
+		{	document.getElementById("r").focus();
+			return true;
+		}
+	    return false;
+	}
+	
+	function computeAll()
+	{   document.getElementById("resPermutation").innerHTML = "";
+		document.getElementById("resCombination").innerHTML = "";
+		document.getElementById("resArrangement").innerHTML = "";
+		document.getElementById("resSelectrofn").innerHTML = "";
+		n = document.getElementById("n").value;
+		r = document.getElementById("r").value;
+		if (invalid(n, r)) return;    
+		clickPerm();
+		clickComb();
+		clickArra();
+		clickSele();
+	}	
+</script>
+<script>
+	function clickCatalan()
+	{   document.getElementById("resCatalan").innerHTML = "";
+		z = document.getElementById("z").value;
+		if (invalid(2*z, z)) return;
+		document.getElementById("resCatalan").innerHTML = (Comb(2*z, z))/(z*1+1);
+	}
+		
+	function clicktri()
+	{   document.getElementById("restri").innerHTML = "";
+		z = document.getElementById("z").value;
+		if (invalid(z*1+1, 2)) return;
+		document.getElementById("restri").innerHTML = Comb(z*1+1, 2);
+	}	
+		
+	function clickharmonic()
+	{   document.getElementById("resharmonic").innerHTML = "";
+		z = document.getElementById("z").value;
+		har = 1;
+		for (i=2;i<=z*1;i++)
+		    har += 1/i;
+		document.getElementById("resharmonic").innerHTML = har;
+	}
+
+	function clickfib()
+	{   document.getElementById("refib").innerHTML = "";
+		z = document.getElementById("z").value;
+		document.getElementById("refib").innerHTML = fib(z);
+	}
+	function fib(z)
+	{   if (z <= 1) 
+			return z; 
+		return fib(z-1) + fib(z-2); 
+	}
+		
+	function clicklucas()
+	{   document.getElementById("relucas").innerHTML = "";
+		z = document.getElementById("z").value;
+		document.getElementById("relucas").innerHTML = lucas(z*1);
+	}
+	
+    function lucas(z)
+	{	if (z == 0) 
+			return 2; 
+		if (z == 1) 
+			return 1;   
+		return lucas(z - 1) +  lucas(z - 2); 
+	}
+	
+	function clickeulerian()
+	{	document.getElementById("reeulerian").innerHTML = "";
+		n = document.getElementById("n").value;
+		r = document.getElementById("r").value;
+        document.getElementById("reeulerian").innerHTML = eulerian(n*1,r*1);
+	}
+
+	function eulerian(n,m)
+	{	if (m >= n || n == 0)	
+			return 0; 			
+		if (m == 0)
+			return 1; 
+		return (n - m) * eulerian(n - 1, m - 1) +(m + 1) * eulerian(n - 1, m);	
+	}
+		
+	function clickstirling()
+	{	document.getElementById("restirling").innerHTML = "";
+		n = document.getElementById("n").value;
+		r = document.getElementById("r").value;
+		document.getElementById("restirling").innerHTML = stirling(n*1,r*1);
+	}
+
+	function stirling(n,k)
+	{	if (k == 0 && n != 0)
+			return 0;
+		else if (k == n)
+			return 1;
+		else
+			return k*stirling(n-1, k) + stirling(n-1, k-1);
+	}
+		
+	function Compute_number()
+	{	document.getElementById("resCatalan").innerHTML = "";
+		document.getElementById("restri").innerHTML = "";
+		document.getElementById("resharmonic").innerHTML = "";
+		document.getElementById("refib").innerHTML = "";
+		document.getElementById("relucas").innerHTML = "";
+		document.getElementById("reeulerian").innerHTML = "";
+		document.getElementById("restirling").innerHTML = "";
+		n = document.getElementById("n").value;
+		r = document.getElementById("r").value;
+		if (invalid(n, r)) return;
+		clickCatalan();
+		clicktri();
+		clickharmonic();
+		clickfib();
+		clicklucas();
+		clickeulerian();
+		clickstirling();		
+	}
+	
+	function Compute_Distribution()
+	{	document.getElementById("NYY").innerHTML = "";
+		document.getElementById("NYN").innerHTML = "";	
+		m = document.getElementById("m").value;
+		n2 = document.getElementById("n2").value;
+		if (invalid(m, n2)) return;  
+		document.getElementById("NYY").innerHTML = Comb(m*1 + n2*1 - 1, m*1);
+		document.getElementById("NYN").innerHTML = Comb(m*1 - 1, n2*1 - 1);
+	}
+	
+</script>
+<body background="naruto.jpg" style="background-size:cover;background-attachment:fixed"> <!--背景-->
+<center>
+<br>
+<br>  
+<br>  
+<h1><i>
+	Discrete Math Calculator
+</i></h1>
+</center>
+	<br>
+<center>
+    <audio controls autoplay="autoplay" loop="loop"> <!--音樂-->
+        <source src="naruto_trap.mp3"/>
+        若沒播放，說明你的瀏覽器不支持！
+	</audio>
+	<br>
+	<br>
+	<p>	
+	<table class="box"  border = 1>
+        <tr align = center height = 40>
+            <td width = 200>
+                <span class="font">n = </span><input class="font2" type="number" id="n" value="7" min="0" style="width: 5em"/>
+            </td>  
+            <td width = 200>
+                <span class="font">r = </span><input class="font2" type="number" id="r" value="3" min="0" style="width: 5em"/>
+            </td> 
+            <td width = 200>
+                <span class="font">z = </span><input class="font2" type="number" id="z" value="5" min="0" style="width: 5em"/>
+            </td> 
+        </tr>    
+    </table>
+    <br>
+	<table class="box" border = 1>
+		<tr align = center height = 40>
+			<td width = 100>Formula</td>
+			<td width = 200>Answer</td>
+			<td width = 200><button type="button" onclick="computeAll()">Compute All</button></td>
+			<td width = 100>Order relevant</td>
+			<td width = 100>Repetition</td>
+			<td width = 450>Memo</td>
+		</tr>
+		<tr align = center height = 40>
+			<td class="font2" width = 100>P(n, r)</td>
+			<td width = 200><span id="resPermutation"></span></td>
+			<td width = 200><button type="button" onclick="clickPerm()">Permutation</button></td>
+			<td width = 100>yes</td>
+			<td width = 100>no</td>
+			<td width = 450 align = left># Permutations of size r from n distinct objects</td>
+		</tr>
+		<tr align = center height = 40>
+			<td class="font2" width = 100>C(n, r)</td>
+			<td width = 200><span id="resCombination"></span></td>
+			<td width = 200><button type="button" onclick="clickComb()">Combination</button></td>
+			<td width = 100>no</td>
+			<td width = 100>no</td>
+			<td width = 450 align = left># Selections/Combinations of size r from n distinct objects</td>
+		</tr>
+		<tr align = center height = 40>
+			<td class="font2" width = 100>n<sup>r</sup></td>
+			<td width = 200><span id="resArrangement"></span></td>
+			<td width = 200><button type="button" onclick="clickArra()">Arrangement with repetition</button></td>
+			<td width = 100>yes</td>
+			<td width = 100>yes</td>
+			<td width = 450 align = left># Arrangements with repetition of size r from n distinct objects</td>
+		</tr>
+		<tr align = center height = 40>
+			<td class="font2" width = 100>C(r+n-1, r)</td>
+			<td width = 200><span id="resSelectrofn"></span></td>
+			<td width = 200><button type="button" onclick="clickSele()">Selection with repetition</button></td>
+			<td width = 100>no</td>
+			<td width = 100>yes</td>
+			<td width = 450 align = left># Selections with repetition of size r from n distinct objects</td>
+		</tr>
+	</table>
+	<br>
+	<table class="box" border=1>
+		<tr align = center height = 40>
+			<td width = 250>Number</td>
+			<td width = 100>Answer</td>
+			<td width = 250><button type="button" onclick="Compute_number()">Compute number</button></td>
+			<td width = 300>Memo</td>
+		</tr>
+		<tr align = center height = 40>
+			<td class="font2" width = 250>Catalan Numbers</td>
+			<td width = 100><span id="resCatalan"></span></td>
+			<td width = 250><button type="button" onclick="clickCatalan()">Catalan Numbers</button></td>
+			<td width = 300 align = left>#C(z) = C(2z,z)/(z+1)</td>
+		</tr>
+		<tr align = center height = 40>
+			<td class="font2" width = 250>Triangular Numbers</td>
+			<td width = 100><span id="restri"></span></td>
+			<td width = 250><button type="button" onclick="clicktri()">Triangular Numbers</button></td>
+			<td width = 300 align = left>#T(z) = C(z+1,2)</td>
+		</tr>
+		<tr align = center height = 40>
+			<td class="font2" width = 250>Harmonic Numbers</td>
+			<td width = 100><span id="resharmonic"></span></td>
+			<td width = 250><button type="button" onclick="clickharmonic()">Harmonic Numbers</button></td>
+			<td width = 300 align = left>#H(z) = 1+1/2+1/3+...+1/z</td>
+		</tr>
+		<tr align = center height = 40>
+			<td class="font2" width = 250>Fibonacci Numbers</td>
+			<td width = 100><span id="refib"></span></td>
+			<td width = 250><button type="button" onclick="clickfib()">Fibonacci Numbers</button></td>
+			<td width = 300 align = left>#F(z) = F(z-1)+F(z-2)</td>
+		</tr>
+		<tr align = center height = 40>
+			<td class="font2" width = 250>Lucas Numbers</td>
+			<td width = 100><span id="relucas"></span></td>
+			<td width = 250><button type="button" onclick="clicklucas()">Lucas Numbers</button></td>
+			<td width = 300 align = left>#L(0)=2;L(1)=1;L(z) = L(z-1)+L(z-2)</td>
+		</tr>
+		<tr align = center height = 40>
+			<td class="font2" width = 250>Eulerian Numbers</td>
+			<td width = 100><span id="reeulerian"></span></td>
+			<td width = 250><button type="button" onclick="clickeulerian()">Eulerian Numbers</button></td>
+			<td width = 300 align = left>#A(n,r) = (n-r)*A(n-1,r-1)+(r+1)A(n-1,r)</td>
+		</tr>
+		<tr align = center height = 40>
+			<td class="font2" width = 250>Stirling number of the second kind</td>
+			<td width = 100><span id="restirling"></span></td>
+			<td width = 250><button type="button" onclick="clickstirling()">Stirling number of the second kind</button></td>
+			<td width = 300 align = left>#S(n,r)=S(n-1,r-1)+r*S(n-1,r)</td>
+		</tr>
+	</table>
+	<br>
+	<br>
+	<br>
+	<br>
+	<table class="box"  border = 1>
+        <tr align = center height = 40>
+            <td width = 200>
+                <span class="font">m = </span><input class="font2" type="number" id="m" value="6" min="0" style="width: 5em"/>
+            </td>  
+            <td width = 200>
+                <span class="font">n = </span><input class="font2" type="number" id="n2" value="4" min="0" style="width: 5em"/>
+			</td> 
+	</table>
+	<br>
+	<table class="box" border = 1>
+		<tr align = center height = 40>
+			<td class="font2" width = 150>Objects Are Distinct</td>
+			<td class="font2" width = 150>Containers Are Distinct</td>
+			<td class="font2" width = 150>Some Containers May Be Empty</td>
+			<td width = 200><button type="button" onclick="Compute_Distribution()">Number Of Distributions</button></td>
+			<td class="font2" width = 300>Memo</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 100>No</td>
+			<td width = 100>Yes</td>
+			<td width = 100>Yes</td>
+			<td width = 100><span id="NYY"></span></td>
+			<td width = 300 align = left># C(n+m-1,m)</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 100>No</td>
+			<td width = 100>No</td>
+			<td width = 100>Yes</td>
+			<td width = 100>-</span></td>
+			<td width = 300 align = left><span>#(1) <i>p</i>(m),for n=m</span><br><span>#(2) <i>p</i>(m,1)+<i>p</i>(m,2)+..+<i>p</i>(m,n), for n < m</span></td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 100>No</td>
+			<td width = 100>Yes</td>
+			<td width = 100>No</td>
+			<td width = 100><span id="NYN"></span></td>
+			<td width = 300 align = left># C(m-1,n-1)</td>
+		</tr>
+		<tr align = center height = 40>
+			<td width = 100>No</td>
+			<td width = 100>No</td>
+			<td width = 100>No</td>
+			<td width = 100>-</span></td>
+			<td width = 300 align = left># <i>p</i>(m,n)</td>
+		</tr>
+	</table>
+</center>
+</body>
+</html>
